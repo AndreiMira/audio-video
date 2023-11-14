@@ -1,56 +1,83 @@
 .fonsPlayer {
-    position: relative;
-    width: 400px;
-    height: 250px;
-    background: radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
-    overflow: hidden;
+	position: relative;
+	width: 400px;
+	height: 250px;
+	background: radial-gradient(ellipse at center, rgba(255, 254, 234, 1) 0%, rgba(255, 254, 234, 1) 35%, #b7e8eb 100%);
+	overflow: hidden;
 }
 
-.ocean { 
-    height: 1%;
-    width: 100%;
-    position: absolute;
-    bottom:0;
-    left:0;
-    background: #015871;
+.ocean {
+	height: 1%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #015871;
 }
-  
+
 .wave {
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
-    position: absolute;
-    top: -198px;
-    width: 6400px;
-    height: 198px;
-    transform: translate3d(0, 0, 0);
+	background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
+	position: absolute;
+	top: -198px;
+	width: 6400px;
+	height: 198px;
+	transform: translate3d(0, 0, 0);
 }
 
 .wave.playing {
-    animation: wave 4s cubic-bezier( 0.40, 0.45, 0.63, 0.45) infinite;
+	animation: wave 4s cubic-bezier(0.4, 0.45, 0.63, 0.45) infinite;
 }
-  
+
 .wave:nth-of-type(2) {
-    top: -175px;
-    opacity: 1;
+	top: -175px;
+	opacity: 1;
 }
-  
+
 .wave:nth-of-type(2).playing {
-    animation: wave 4s cubic-bezier( 0.40, 0.45, 0.63, 0.45) -.125s infinite, swell 7s ease -1.25s infinite;
+	animation: wave 4s cubic-bezier(0.4, 0.45, 0.63, 0.45) -0.125s infinite, swell 7s ease -1.25s infinite;
 }
-  
+
 @keyframes wave {
-    0% {
-      margin-left: 0;
-    }
-    100% {
-      margin-left: -1600px;
-    }
+	0% {
+		margin-left: 0;
+	}
+	100% {
+		margin-left: -1600px;
+	}
 }
-  
+
 @keyframes swell {
-    0%, 100% {
-      transform: translate3d(0,-25px,0);
-    }
-    50% {
-      transform: translate3d(0,5px,0);
-    }
+	0%,
+	100% {
+		transform: translate3d(0, -25px, 0);
+	}
+	50% {
+		transform: translate3d(0, 5px, 0);
+	}
+}
+
+.icon {
+	fill: white;
+}
+
+.controlButtons {
+	display: flex;
+	align-items: center;
+}
+
+.controlButton {
+	background-color: #009688;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	margin: 10px 10px;
+	cursor: pointer;
+}
+
+#volume-slider {
+	width: 200px;
+	height: 10px;
+	background-color: #ccc;
+	border-radius: 5px;
+	position: relative;
 }
