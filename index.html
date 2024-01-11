@@ -24,14 +24,14 @@
 		<!-- Afegim un botó de control per engegar la música. Utilitzem una font d'icones. -->
 		<div class="controlButtons">
 			<!-- Botón de play video (engegar) -->
-			<button type="button" onclick="engegarAudio();" class="controlButton">
+			<button type="button" onclick="controlarReproduccion(true);" class="controlButton">
 				<svg class="icon" width="24" height="24" viewBox="0 0 24 24">
 					<path d="M3 22v-20l18 10-18 10z"></path>
 				</svg>
 			</button>
 
 			<!-- Botón de pause video (aturar) -->
-			<button type="button" onclick="pararAudio();" class="controlButton">
+			<button type="button" onclick="controlarReproduccion(false);" class="controlButton">
 				<svg class="icon" width="24" height="24" viewBox="0 0 24 24">
 					<path d="M6 4h4v16h-4zM14 4h4v16h-4z"></path>
 				</svg>
@@ -42,36 +42,43 @@
 		<!-- Recordeu que heu de seguir les lleis en matèria de propietat intelectual.
          En aquest cas, cal nomenar i enllaçar l'autor i el tipus de llicència. 
     -->
-		<div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee">"<a rel="nofollow" href="https://timtaj.com/royalty-free-music/background-technology">Background Technology</a>" by <a rel="nofollow" href="https://freemusicarchive.org/music/timtaj/contact">Taj Tim</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International License</a></div>
+		<div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee">
+			"<a rel="nofollow" href="https://timtaj.com/royalty-free-music/background-technology">Background Technology</a>" by <a rel="nofollow" href="https://freemusicarchive.org/music/timtaj/contact">Taj Tim</a> is licensed under
+			<a rel="nofollow" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
+		</div>
 		<div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee">"Animació CSS de <a rel="nofollow" href="https://codepen.io/tedmcdo">Ted MacDonald</a>: a CodePen <a rel="nofollow" href="https://codepen.io/tedmcdo/pen/PqxKXg">CSS & SVG Waves Animation</a></div>
 		<!-- Cal seleccionar l'element d'àudio. -->
 		<script>
-			var audio = document.getElementById("player");
-
-			function engegarAudio() {
-				// engeguem audio
-				audio.play();
-				// engeguem animació
+			// Función para manipular el audio y la animación
+			function controlarReproduccion(reproducir) {
+				var audio = document.getElementById("player");
 				var waves = document.querySelectorAll(".wave");
-				for (var i = 0; i < waves.length; i++) {
-					waves[i].classList.add("playing");
+
+				if (reproducir) {
+					// Reproducir audio
+					audio.play();
+
+					// Agregar clase "playing" a las ondas para iniciar la animación
+					waves.forEach(function (onda) {
+						onda.classList.add("playing");
+					});
+				} else {
+					// Detener audio y reiniciar posición de reproducción
+					audio.pause();
+					audio.currentTime = 0;
+
+					// Quitar clase "playing" a las ondas para detener la animación
+					waves.forEach(function (onda) {
+						onda.classList.remove("playing");
+					});
 				}
 			}
 
-			function pararAudio() {
-				// parem audio
-				audio.pause();
-				audio.currentTime = 0;
-				// aturem animació
-				var waves = document.querySelectorAll(".wave");
-				for (var i = 0; i < waves.length; i++) {
-					waves[i].classList.remove("playing");
-				}
-			}
-
-			var volume = document.getElementById("volume-slider");
-			volume.addEventListener("change", function (e) {
-				audio.volume = e.currentTarget.value / 100;
+			// Evento de cambio en el control deslizante de volumen
+			document.getElementById("volume-slider").addEventListener("change", function (evento) {
+				var audio = document.getElementById("player");
+				// Actualizar el volumen del audio en base al valor del control deslizante
+				audio.volume = evento.currentTarget.value / 100;
 			});
 		</script>
 	</body>
